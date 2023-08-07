@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,23 +51,23 @@
   </style>
 </head>
 <body>
-  <!-- Current time clock -->
+
   <div class="clock">
     <p id="clock"></p>
   </div>
 
-  <!-- Timer -->
+
   <div class="timer">
     <p id="timer"></p>
   </div>
 
-  <!-- Input field to set the timer -->
+  
   <form>
     <input type="text" id="duration" placeholder="Enter timer duration in minutes">
     <input type="submit" value="Start Timer" onclick="startTimer(); return false;">
   </form>
 
-  <!-- Add JavaScript to update the clock and timer -->
+  
   <script>
     function updateClock() {
       const now = new Date();
@@ -101,3 +102,400 @@
     setInterval(updateClock, 1000);
   </script>
 </body>
+  --->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+    function copySnippet(snippetText) {
+      var tempTextarea = document.createElement("textarea");
+      tempTextarea.value = snippetText;
+      document.body.appendChild(tempTextarea);
+      tempTextarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempTextarea);
+    }
+  </script>
+</head>
+<body>
+
+
+  <div style="display: none;">
+    <pre><code id="hidden-snippet1">
+ 
+#include &lt;stdio.h&gt;
+
+int ary[10][10], completed[10], i, j, n, cost &#x3D; 0;
+
+void mincost(int city) {
+    int ncity;
+    completed[city] &#x3D; 1;
+
+    printf(&quot;%d---&gt;&quot;, city + 1);
+    ncity &#x3D; least(city);
+
+    if (ncity &#x3D;&#x3D; 999) {
+        ncity &#x3D; 0;
+        printf(&quot;%d&quot;, ncity + 1);
+        cost +&#x3D; ary[city][ncity];
+
+        return;
+    }
+
+    mincost(ncity);
+}
+
+int least(int c) {
+    int nc &#x3D; 999, min &#x3D; 999, kmin;
+
+    for (i &#x3D; 0; i &lt; n; i++) {
+        if ((ary[c][i] !&#x3D; 0) &amp;&amp; (completed[i] &#x3D;&#x3D; 0))
+            if (ary[c][i] + ary[i][c] &lt; min) {
+                min &#x3D; ary[c][i] + ary[i][0];
+                kmin &#x3D; ary[c][i];
+                nc &#x3D; i;
+            }
+    } 
+
+    if (min !&#x3D; 999)
+        cost +&#x3D; kmin;
+
+    return nc;
+}
+
+int main() {
+    printf(&quot;Enter the number of villages: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;\nEnter the Cost Matrix\n&quot;);
+
+    for (i &#x3D; 0; i &lt; n; i++) {
+        printf(&quot;\nEnter Elements of Row: %d\n&quot;, i + 1);
+
+        for (j &#x3D; 0; j &lt; n; j++)
+            scanf(&quot;%d&quot;, &amp;ary[i][j]);
+
+        completed[i] &#x3D; 0;
+    }
+  
+    printf(&quot;\n\nThe Path is:\n&quot;);
+    mincost(0); &#x2F;&#x2F; passing 0 because starting vertex
+
+    printf(&quot;\n\nMinimum cost is %d\n&quot;, cost);
+
+    return 0;
+}
+
+    </code></pre>
+  </div>
+  <button class="button" onclick="copySnippet(document.getElementById('hidden-snippet1').innerText)">error retrieving data 1</button>
+
+
+
+
+  <div style="display: none;">
+    <pre><code id="hidden-snippet2">
+ 
+
+#include &lt;stdio.h&gt;
+#define infinity 999
+void dijkstra(int n, int v, int cost[10][10], int dist[100])
+{
+    int i, u, count, w, flag[10], min;
+    for (i &#x3D; 1; i &lt;&#x3D; n; i++){
+        flag[i] &#x3D; 0, dist[i] &#x3D; cost[v][i];
+    }
+    count &#x3D; 2;
+    while (count &lt;&#x3D; n)
+    {
+        min &#x3D; 99;
+        for (w &#x3D; 1; w &lt;&#x3D; n; w++){
+            if (dist[w] &lt; min &amp;&amp; !flag[w])
+                min &#x3D; dist[w], u &#x3D; w;
+        }
+        flag[u] &#x3D; 1;
+        count++;
+        for (w &#x3D; 1; w &lt;&#x3D; n; w++){
+            if ((dist[u] + cost[u][w] &lt; dist[w]) &amp;&amp; !flag[w])
+                dist[w] &#x3D; dist[u] + cost[u][w];
+        }
+    }
+}
+void main()
+{
+    int n, v, i, j, cost[10][10], dist[10];
+    printf(&quot;\n Enter the number of nodes:&quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+    printf(&quot;\n Enter the cost matrix:\n&quot;);
+    for (i &#x3D; 1; i &lt;&#x3D; n; i++) {
+        for (j &#x3D; 1; j &lt;&#x3D; n; j++)
+        {
+            scanf(&quot;%d&quot;, &amp;cost[i][j]);
+            if (cost[i][j] &#x3D;&#x3D; 0)
+                cost[i][j] &#x3D; infinity;
+        }
+    }
+    printf(&quot;\n Enter the source Vertex:&quot;);
+    scanf(&quot;%d&quot;, &amp;v);
+    dijkstra(n, v, cost, dist);
+    printf(&quot;\n Shortest path:\n&quot;);
+    for (i &#x3D; 1; i &lt;&#x3D; n; i++){ 
+        if (i !&#x3D; v) {
+            printf(&quot;%d-&gt;%d,cost&#x3D;%d\n&quot;, v, i, dist[i]);
+        }
+    }
+}
+        
+    </code></pre>
+  </div>
+  <button class="button" onclick="copySnippet(document.getElementById('hidden-snippet2').innerText)">error retrieving data 2</button>
+
+
+
+
+
+  <div style="display: none;">
+    <pre><code id="hidden-snippet3">
+ 
+
+#include &lt;stdio.h&gt;
+ 
+int max(int a, int b) { 
+    return (a &gt; b)? a : b; 
+}
+int knapsack(int W, int wt[], int val[], int n)
+{
+   int i, w;
+   int K[n+1][W+1];
+ 
+   for (i &#x3D; 0; i &lt;&#x3D; n; i++)
+   {
+       for (w &#x3D; 0; w &lt;&#x3D; W; w++)
+       {
+           if (i&#x3D;&#x3D;0 || w&#x3D;&#x3D;0)
+               K[i][w] &#x3D; 0;
+           else if (wt[i-1] &lt;&#x3D; w)
+                 K[i][w] &#x3D; max(val[i-1] + K[i-1][w-wt[i-1]],  K[i-1][w]);
+           else
+                 K[i][w] &#x3D; K[i-1][w];
+       }
+   }
+ 
+   return K[n][W];
+}
+ 
+int main()
+{
+    int obj, W;
+    printf(&quot;enter no of objects: &quot;);
+    scanf(&quot;%d&quot;,&amp;obj);
+    int val[obj];
+    int wt[obj];
+    printf(&quot;enter weights\n&quot;);
+    for(int i&#x3D;0;i&lt;obj;i++){
+        scanf(&quot;%d&quot;,&amp;wt[i]);
+    }
+    printf(&quot;enter profits\n&quot;);
+    for(int i&#x3D;0;i&lt;obj;i++){
+        scanf(&quot;%d&quot;,&amp;val[i]);
+    }
+    printf(&quot;enter max capacity: &quot;);
+    scanf(&quot;%d&quot;,&amp;W);
+    int n &#x3D; sizeof(val)&#x2F;sizeof(val[0]);
+    printf(&quot;\nTotal Profit &#x3D; %d&quot;, knapsack(W, wt, val, n));
+    return 0;
+}
+        
+    </code></pre>
+  </div>
+  <button class="button" onclick="copySnippet(document.getElementById('hidden-snippet3').innerText)">error retrieving data 3</button>
+
+
+
+
+
+  <div style="display: none;">
+    <pre><code id="hidden-snippet4">
+ 
+#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+int a[30];
+
+int place(int pos) {
+    for (int i &#x3D; 1; i &lt; pos; i++) {
+        if (a[i] &#x3D;&#x3D; a[pos] || abs(a[i] - a[pos]) &#x3D;&#x3D; abs(i - pos)) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void print_sol(int n) {
+    int count&#x3D;0;
+    count++;
+    printf(&quot;\n\nSolution #%d:\n&quot;, count);
+    for (int i &#x3D; 1; i &lt;&#x3D; n; i++) {
+        for (int j &#x3D; 1; j &lt;&#x3D; n; j++) {
+            printf(a[i] &#x3D;&#x3D; j ? &quot;Q\t&quot; : &quot;*\t&quot;);
+        }
+        printf(&quot;\n&quot;);
+    }
+}
+
+void queen(int n, int k) {
+    if (k &gt; n) {
+        print_sol(n);
+        return;
+    }
+    
+    for (a[k] &#x3D; 1; a[k] &lt;&#x3D; n; a[k]++) {
+        if (place(k)) {
+            queen(n, k + 1);
+        }
+    }
+}
+
+int main() {
+    int n;
+    printf(&quot;Enter the number of Queens:\n&quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+    queen(n, 1);
+    return 0;
+}
+
+    </code></pre>
+  </div>
+  <button class="button" onclick="copySnippet(document.getElementById('hidden-snippet4').innerText)">error retrieving data 4</button>
+
+
+
+
+
+  <div style="display: none;">
+    <pre><code id="hidden-snippet5">
+ 
+#include &lt;stdio.h&gt;
+#define V 5
+
+int graph[V][V], path[V];
+
+int isSafe(int v, int pos, int path[V]) {
+    &#x2F;&#x2F; Check if it&#39;s safe to add vertex v to the path at position pos
+    return graph[path[pos - 1]][v] &amp;&amp; !path[pos];
+}
+
+int hamiltonianCycleUtil(int pos) {
+    if (pos &#x3D;&#x3D; V)
+        return graph[path[pos - 1]][path[0]]; &#x2F;&#x2F; Check if path is cyclic
+
+    for (int v &#x3D; 1; v &lt; V; v++) {
+        if (isSafe(v, pos, path)) {
+            path[pos] &#x3D; v; &#x2F;&#x2F; Add vertex to the path
+            if (hamiltonianCycleUtil(pos + 1))
+                return 1; &#x2F;&#x2F; Continue exploring
+        }
+    }
+
+    return path[pos] &#x3D; -1; &#x2F;&#x2F; Backtrack
+}
+
+int main() {
+    for (int i &#x3D; 0; i &lt; V; i++)
+        path[i] &#x3D; -1, path[0] &#x3D; 0;
+
+    printf(&quot;Enter the adjacency matrix:\n&quot;);
+    for (int i &#x3D; 0; i &lt; V; i++)
+        for (int j &#x3D; 0; j &lt; V; scanf(&quot;%d&quot;, &amp;graph[i][j++]));
+
+    if (hamiltonianCycleUtil(1)) {
+        printf(&quot;Hamiltonian Cycle exists:\n&quot;);
+        for (int i &#x3D; 0; i &lt; V; printf(&quot;%d &quot;, path[i++]));
+        printf(&quot;%d\n&quot;, path[0]);
+    } else {
+        printf(&quot;No Hamiltonian Cycle exists.\n&quot;);
+    }
+
+    return 0;
+}
+    </code></pre>
+  </div>
+  <button class="button" onclick="copySnippet(document.getElementById('hidden-snippet5').innerText)">error retrieving data 5</button>
+
+
+
+
+
+
+  <div style="display: none;">
+    <pre><code id="hidden-snippet6">
+ 
+#include &lt;stdio.h&gt;
+
+#define V 4
+
+int isSafe(int graph[V][V], int color[], int vertex, int c)
+{
+    for (int i &#x3D; 0; i &lt; V; i++) {
+        if (graph[vertex][i] &amp;&amp; color[i] &#x3D;&#x3D; c) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int graphColoring(int graph[V][V], int m, int color[], int vertex)
+{
+    if (vertex &#x3D;&#x3D; V) {
+        for (int i &#x3D; 0; i &lt; V; i++) {
+            printf(&quot; %d &quot;, color[i]);
+        }
+        printf(&quot;\n&quot;);
+    }
+
+    for (int c &#x3D; 1; c &lt;&#x3D; m; c++) {
+        if (isSafe(graph, color, vertex, c)) {
+            color[vertex] &#x3D; c;
+            if (graphColoring(graph, m, color, vertex + 1)) {
+                return 1;
+            }
+            color[vertex] &#x3D; 0;
+        }
+    }
+    return 0;
+}
+
+int main()
+{
+    int graph[V][V] &#x3D; {
+        {0, 1, 1, 1},
+        {1, 0, 1, 0},
+        {1, 1, 0, 1},
+        {1, 0, 1, 0},
+    };
+    int m &#x3D; 3; &#x2F;&#x2F; Number of colors
+
+    int color[V];
+    for (int i &#x3D; 0; i &lt; V; i++) {
+        color[i] &#x3D; 0;
+    }
+    
+    if (graphColoring(graph, m, color, 0)) {
+        printf(&quot;Solution are\n&quot;);
+    }
+    else{
+        printf(&quot;Solution donot exist\n&quot;);
+    }
+    return 0;
+}
+
+    </code></pre>
+  </div>
+  <button class="button" onclick="copySnippet(document.getElementById('hidden-snippet6').innerText)">error retrieving data 6</button>
+
+
+
+</body>
+</html>
+
