@@ -496,6 +496,70 @@ int main()
 
 
 
+
+
+
+  
+
+   <div style="display: none;">
+    <pre><code id="hidden-snippet7">
+ 
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, precision_score, recall_score, confusion_matrix
+from sklearn.linear_model import LogisticRegression # for logistic regression
+from sklearn.tree import DecisionTreeClassifier, plot_tree # for decicion tree
+from sklearn.neighbors import KNeighborsClassifier # for knn
+from sklearn.naive_bayes import GaussianNB # for naive bayes
+from sklearn.svm import SVC # for svm
+from sklearn.ensemble import RandomForestClassifier # for random forest
+# reading the dataset
+data&#x3D;pd.read_csv(&#39;iris.csv&#39;)
+print(&quot;printitng first 5 records of the dataset\n&quot;,data.head())
+# loading the features
+X&#x3D;data.iloc[:,0:4]
+y&#x3D;data.iloc[:,-1]
+#splitting the data
+X_train, X_test,y_train, y_test &#x3D; train_test_split(X, y, test_size&#x3D;0.2)
+#model building
+#model&#x3D;LogisticRegression() # for logistic regression
+model&#x3D;DecisionTreeClassifier() # for decicion tree
+#model&#x3D;KNeighborsClassifier(n_neighbors &#x3D; 5, metric &#x3D; &#39;minkowski&#39;, p &#x3D; 2) # for knn
+#model&#x3D;GaussianNB(priors&#x3D;None, var_smoothing&#x3D;1e-9) # for naive bayes
+#model&#x3D;SVC() # for svm
+#model&#x3D;RandomForestClassifier() #for random forest
+model.fit(X_train,y_train)
+# prediction on test data
+y_pred&#x3D;model.predict(X_test)
+print(&quot;predicted values are\n&quot;,y_pred)
+#evaluating the model
+print(&quot;confusion matrix&quot;,confusion_matrix(y_test, y_pred))
+print(&quot;accuracy: &quot;,accuracy_score(y_test, y_pred))
+print(&quot;Precision:&quot;, precision_score(y_test, y_pred, average&#x3D;&#39;weighted&#39;))
+print(&quot;Recall:&quot;, recall_score(y_test, y_pred, average&#x3D;&#39;weighted&#39;))
+# below lines of code are only for decision tree for drawing the tree
+import matplotlib.pyplot as plt
+plt.figure()
+plot_tree(
+model, 
+feature_names&#x3D;[&#39;SepalLength&#39;,&#39;SepalWidth&#39;,&#39;Petallength&#39;,&#39;PetalWidth&#39;], 
+filled&#x3D;True
+)
+plt.show()
+
+
+    </code></pre>
+  </div>
+  <button class="button" onclick="copySnippet(document.getElementById('hidden-snippet7').innerText)">error retrieving data 6</button>
+
+
+
+
+  <a href="https://drive.google.com/uc?export=download&id=1BMP_64QTPyGQNSe4V7pzgpifC2bEMbi9" download><button>Download iris</button></a>
+
+
+
 </body>
 </html>
 
